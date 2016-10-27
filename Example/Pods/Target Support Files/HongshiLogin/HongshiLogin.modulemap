@@ -1,0 +1,6 @@
+framework module HongshiLogin {
+  umbrella header "HongshiLogin-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -7,6 +7,7 @@
 //
 
 #import "GhViewController.h"
+#import "Gh_HSLogin.h"
 
 @interface GhViewController ()
 

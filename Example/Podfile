@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'HongshiLogin_Example' do
+  pod 'HongshiLogin', :path => '../'
+
+  target 'HongshiLogin_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

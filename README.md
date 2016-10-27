@@ -22,7 +22,7 @@ pod "HongshiLogin"
 
 ## Author
 
-龚欢, gonghuan2020@gmail.com
+John, gonghuan2020@gmail.com
 
 ## License
 

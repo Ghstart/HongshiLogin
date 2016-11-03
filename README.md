@@ -20,6 +20,69 @@ it, simply add the following line to your Podfile:
 pod "HongshiLogin"
 ```
 
+## Use 
+
+### steps
+
+#### One Step:
+```
+#import "HSWLLoginConstant.h"
+```
+
+#### Two Step:
+
+*You can use finsishBlcok call back*
+
+```
+HSWLLoginManager *loginManager = [[HSWLLoginManager alloc] init];
+[loginManager showAddTo:self finishedBlock:nil];
+```
+
+#### Using Delegate to handle Methods
+
+#### add delelget to instance
+
+```
+loginManager.delegate = self;
+```
+
+```
+@interface XXXViewController ()<HSWLLoginManagerDelegate>
+
+@end
+``` 
+
+#### delegate methods according to the Types
+
+```
+- (void)HSWLViewWillShowWhichType:(HSWLShowStyle)ToType {
+   NSLog(@"%ld will show", (long)ToType);
+}
+
+- (void)HSWLViewDidShowWhichType:(HSWLShowStyle)ToType {
+   NSLog(@"%ld did show", (long)ToType);
+}
+
+```
+
+#### types -->
+
+```
+typedef NS_ENUM(NSInteger, HSWLShowStyle) {
+    HSWLLogin = 99,
+    HSWLRegister,
+    HSWLForgetPassword,
+    HSWLFollowDetails
+};
+
+```
+
+
+
+
+
+
+
 ## Author
 
 John, gonghuan2020@gmail.com

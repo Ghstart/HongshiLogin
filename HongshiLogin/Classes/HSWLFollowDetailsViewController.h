@@ -6,11 +6,8 @@
 //  Copyright © 2016年 龚欢. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "HSWLPrivateProtocol.h"
+#import "HSWLLoginBaseViewController.h"
 
-@interface HSWLFollowDetailsViewController : UIViewController
-
-@property (nonatomic, weak) id<HSWLPrivateProtocol>privateDelegate;
+@interface HSWLFollowDetailsViewController : HSWLLoginBaseViewController
 
 @end

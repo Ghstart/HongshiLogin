@@ -24,6 +24,7 @@
 @property (nonatomic, strong) HSWLFollowDetailsViewController   *followVC;
 
 @property (nonatomic, strong) UIViewController                  *privateVC;
+@property (nonatomic, assign) HSWLShowStyle                     type;
 
 @end
 
@@ -40,14 +41,14 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        [self setupWithType:HSWLLogin];
+        self.type = HSWLLogin;
     }
     return self;
 }
 
 - (instancetype)initWithType:(HSWLShowStyle)type {
     if (self = [super init]) {
-        [self setupWithType:type];
+        self.type = type;
     }
     return self;
 }
@@ -62,7 +63,26 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - SetUp type
+#pragma mark - Private Method
+
+- (HSWLShowStyle)accordingToWhichVC:(UIViewController *)whichVC {
+    
+    if ([whichVC isMemberOfClass:[HSWLLoginViewController class]])
+    {
+        return HSWLLogin;
+    }
+    else if ([whichVC isMemberOfClass:[HSWLRegisterViewController class]])
+    {
+        return HSWLRegister;
+    }
+    else if ([whichVC isMemberOfClass:[HSWLForgetPasswordViewController class]])
+    {
+        return HSWLForgetPassword;
+    }
+    else {
+        return HSWLFollowDetails;
+    }
+}
 
 - (void)setupWithType:(HSWLShowStyle)type {
     
@@ -129,6 +149,8 @@
 - (void)showAddTo:(UIViewController *)vc finishedBlock:(void(^)(void))finishedBlock {
     if (!vc || ![vc isKindOfClass:[UIViewController class]]) return;
     
+    [self setupWithType:self.type];
+    
     [vc presentViewController:self animated:YES completion:finishedBlock];
 }
 
@@ -158,12 +180,19 @@
 }
 
 - (void)viewWillShow:(UIViewController *)vc {
-    NSLog(@"%@ will show", vc);
-    NSLog(@"----------------------------------");
+    if (!vc) return;
+    
+    if ([self.delegate respondsToSelector:@selector(HSWLViewWillShowWhichType:)]) {
+        [self.delegate HSWLViewWillShowWhichType:[self accordingToWhichVC:vc]];
+    }
 }
 
 - (void)viewDidShow:(UIViewController *)vc {
-    NSLog(@"%@ did show", vc);
+    if (!vc) return;
+    
+    if ([self.delegate respondsToSelector:@selector(HSWLViewDidShowWhichType:)]) {
+        [self.delegate HSWLViewDidShowWhichType:[self accordingToWhichVC:vc]];
+    }
 }
 
 

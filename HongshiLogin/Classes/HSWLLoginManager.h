@@ -8,16 +8,24 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HSWLLoginManager : UIViewController
-
 typedef NS_ENUM(NSInteger, HSWLShowStyle)
 {
-    HSWLLogin,
+    HSWLLogin = 99,
     HSWLRegister,
     HSWLForgetPassword,
     HSWLFollowDetails
 };
 
+@protocol HSWLLoginManagerDelegate <NSObject>
+
+- (void)HSWLViewWillShowWhichType:(HSWLShowStyle)ToType;
+- (void)HSWLViewDidShowWhichType:(HSWLShowStyle)ToType;
+
+@end
+
+@interface HSWLLoginManager : UIViewController
+
+@property (nonatomic, assign) id<HSWLLoginManagerDelegate>delegate;
 
 - (instancetype)initWithType:(HSWLShowStyle)type;
 
